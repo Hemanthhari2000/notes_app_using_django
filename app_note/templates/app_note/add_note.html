@@ -1,0 +1,33 @@
+{% extends 'app_note/base.html' %}
+
+{% block content %}
+
+<div class="container text-center">
+    <br>
+    <h1>Add Note</h1>
+    <hr><br>
+
+    <div class="card card-body">
+        <form action="{% url 'home' %}" method="post">
+            {% csrf_token %}
+            <div class="form-floating mb-3">
+                <!-- <input name="title" type="text" class="form-control" id="titleInput" placeholder="Title"> -->
+                {{ form.title }}
+                <label for="titleInput">Title</label>
+            </div>
+            <div class="form-floating">
+                <!-- <textarea name="description" type="text" class="form-control" style="height: 300px;" id = "noteInput" placeholder="Note"></textarea> -->
+                {{ form.description }}
+                <label for="noteInput">Description</label>
+            </div>
+            <br>
+            <br>
+            <input class="btn btn-primary" type="submit" value="Add Note">
+            
+        </form>
+    </div>
+
+</div>
+
+
+{% endblock %}
