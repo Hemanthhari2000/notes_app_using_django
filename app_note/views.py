@@ -19,6 +19,7 @@ def registerPage(request):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             user = form.save()
+            print(user)
             messages.success(request, "Registered Successfully!")
             return redirect('login')
     context = {
@@ -51,12 +52,17 @@ def logoutUser(request):
 @login_required(login_url='login')
 def home(request):
     # notes = request.user.customer.note_set.all()
+    # notes = Note.objects.filter(user=request.user)
     notes = Note.objects.all()
+    print(notes)
     form = NoteForm()
+    print(form)
     if request.method == 'POST':
         form = NoteForm(request.POST)
-
+        print(form)
+        print(request.POST)
         if form.is_valid():
+            print("valid")
             form.save()
         # The reason to redirect is because we have stored the form data in the db so now to retrive the info only we again run the "home" function that is the home route so it will fetch the data and even the new data will be there this time. this is the reason we use the redirect again here.
         return redirect('home')
