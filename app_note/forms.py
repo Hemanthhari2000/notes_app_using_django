@@ -1,17 +1,18 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
+from django.forms import ModelForm
 from django import forms
 from .models import Note
 
 
-class NoteForm(forms.ModelForm):
+class NoteForm(ModelForm):
     class Meta:
         model = Note
         fields = '__all__'
 
         widgets = {
-            'title': forms.TextInput(
+            'note_title': forms.TextInput(
                 attrs={
                     'class': 'form-control',
                     'name': 'title',
@@ -20,7 +21,7 @@ class NoteForm(forms.ModelForm):
                     'placeholder': "Title"
                 }
             ),
-            'description':  forms.Textarea(
+            'note_body':  forms.Textarea(
                 attrs={
                     'class': 'form-control',
                     'name': 'description',

@@ -11,12 +11,14 @@
     <div class="card card-body">
         <form action="" method="post">
             {% csrf_token %}
+            <div class="customer" style="display: none;" >{{ form.cust_id }}</div>
+
             <div class="form-floating mb-3">
-                {{ form.title }}
+                {{ form.note_title }}
                 <label for="titleInput">Title</label>
             </div>
             <div class="form-floating">
-                {{ form.description }}
+                {{ form.note_body }}
                 <label for="noteInput">Description</label>
             </div>
             <br>

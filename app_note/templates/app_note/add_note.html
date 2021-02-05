@@ -8,16 +8,19 @@
     <hr><br>
 
     <div class="card card-body">
-        <form action="{% url 'home' %}" method="post">
+        <form action="" method="post">
             {% csrf_token %}
+            
+            <div class="customer" style="display: none;" >{{ form.cust_id }}</div>
             <div class="form-floating mb-3">
+                
                 <!-- <input name="title" type="text" class="form-control" id="titleInput" placeholder="Title"> -->
-                {{ form.title }}
+                {{ form.note_title }}
                 <label for="titleInput">Title</label>
             </div>
             <div class="form-floating">
                 <!-- <textarea name="description" type="text" class="form-control" style="height: 300px;" id = "noteInput" placeholder="Note"></textarea> -->
-                {{ form.description }}
+                {{ form.note_body }}
                 <label for="noteInput">Description</label>
             </div>
             <br>

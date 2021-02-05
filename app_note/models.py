@@ -1,24 +1,33 @@
 from django.db import models
 
-# from django.contrib.auth.models import User
-# from django.db.models.signals import post_save
+from django.contrib.auth.models import User
 
 # Create your models here.
 
 
-class Note(models.Model):
-    title = models.CharField(max_length=200)
-    description = models.CharField(max_length=800)
-    created = models.DateTimeField(auto_now_add=True)
+# class Note(models.Model):
+#     title = models.CharField(max_length=200)
+#     description = models.CharField(max_length=800)
+#     created = models.DateTimeField(auto_now_add=True)
+
+#     def __str__(self):
+#         return str(self.title)
+
+
+class Customer(models.Model):
+    user = models.OneToOneField(
+        User, null=True, blank=True, on_delete=models.CASCADE)
+    cust_name = models.CharField(max_length=200, null=True)
+    email = models.EmailField(max_length=200, null=True)
 
     def __str__(self):
-        return str(self.title)
+        return self.cust_name
 
 
-# def user_profile(sender, instance, created, **kwargs):
-#     if created:
-#         Note.objects.create(user=instance)
-#         print("Profile Created!")
+class Note(models.Model):
+    cust_id = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True)
+    note_title = models.CharField(max_length=200, null=True)
+    note_body = models.TextField(null=True)
 
-
-# post_save.connect(user_profile, sender=User)
+    def __str__(self):
+        return self.note_title

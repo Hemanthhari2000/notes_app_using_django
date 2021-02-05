@@ -51,32 +51,40 @@ def logoutUser(request):
 
 @login_required(login_url='login')
 def home(request):
-    # notes = request.user.customer.note_set.all()
-    # notes = Note.objects.filter(user=request.user)
-    notes = Note.objects.all()
+    notes = request.user.customer.note_set.all()
     print(notes)
-    form = NoteForm()
-    print(form)
-    if request.method == 'POST':
-        form = NoteForm(request.POST)
-        print(form)
-        print(request.POST)
-        if form.is_valid():
-            print("valid")
-            form.save()
-        # The reason to redirect is because we have stored the form data in the db so now to retrive the info only we again run the "home" function that is the home route so it will fetch the data and even the new data will be there this time. this is the reason we use the redirect again here.
-        return redirect('home')
-
+    # form = NoteForm(initial={'cust_id': request.user.customer.id})
+    # print(request.user.customer.id)
+    # if request.method == 'POST':
+    #     form = NoteForm(request.POST)
+    #     print(request.POST)
+    #     if form.is_valid():
+    #         print("valid")
+    #         form.save()
+    #     else:
+    #         print('Form not Valid')
+    #     # The reason to redirect is because we have stored the form data in the db so now to retrive the info only we again run the "home" function that is the home route so it will fetch the data and even the new data will be there this time. this is the reason we use the redirect again here.
+    #     return redirect('home')
+    customerName = str(request.user).capitalize()
     context = {
         'notes': notes,
-        'form': form
+        'name': customerName,
     }
     return render(request, 'app_note/home.html', context)
 
 
 @login_required(login_url='login')
 def add_note(request):
-    form = NoteForm()
+    form = NoteForm(initial={'cust_id': request.user.customer.id})
+
+    if request.method == "POST":
+        form = NoteForm(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            print("ERROR")
+            print(form.errors)
+        return redirect('home')
     context = {
         'form': form
     }

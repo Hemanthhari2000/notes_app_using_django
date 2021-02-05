@@ -4,7 +4,7 @@
 
 <div class="container text-center">
     <br>
-    <h1>Notes</h1>
+    <h1>{{ name }}'s Notes</h1>
     <hr><br>
     <a href = "{% url 'add_note' %}" class="btn btn-primary" type="button"><i class="fas fa-plus"></i><b> Add Note</b></a>
     <a href="{% url 'logout' %}" class="btn btn-link" type="button"><i class="fas fa-sign-out-alt"></i><b> Logout</a>
@@ -17,14 +17,14 @@
             <div class="col-md-6">
                 <div class="card card-body" style="margin-bottom: 50px;">
                     <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
-                        <h3><a href="{% url 'note_detail' note.id %}" style="color: black; text-decoration: none" >{{ note.title }}</a></h3>
+                        <h3><a href="{% url 'note_detail' note.id %}" style="color: black; text-decoration: none" >{{ note.note_title }}</a></h3>
                         <div>
                             <a href="{% url 'note_edit' note.id %}" class="btn btn-primary"><i class="far fa-edit"></i></a>
                         <a href="{% url 'note_delete' note.id %}" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
                         </div>
                     </div>
                     <hr>
-                    <h6 style = "padding-left:25px ;">{{ note.description }}</h6>
+                    <h6 style = "padding-left:25px ;">{{ note.note_body }}</h6>
                 </div>
             </div>
         {% endfor %}
