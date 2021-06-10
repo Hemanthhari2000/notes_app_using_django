@@ -65,10 +65,9 @@ def home(request):
     #         print('Form not Valid')
     #     # The reason to redirect is because we have stored the form data in the db so now to retrive the info only we again run the "home" function that is the home route so it will fetch the data and even the new data will be there this time. this is the reason we use the redirect again here.
     #     return redirect('home')
-    customerName = str(request.user).capitalize()
+    # customerName = str(request.user).capitalize()
     context = {
         'notes': notes,
-        'name': customerName,
     }
     return render(request, 'app_note/home.html', context)
 
@@ -76,7 +75,7 @@ def home(request):
 @login_required(login_url='login')
 def add_note(request):
     form = NoteForm(initial={'cust_id': request.user.customer.id})
-
+    
     if request.method == "POST":
         form = NoteForm(request.POST)
         if form.is_valid():

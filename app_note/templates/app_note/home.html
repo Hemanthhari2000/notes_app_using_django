@@ -4,7 +4,7 @@
 
 <div class="container text-center">
     <br>
-    <h1>{{ name }}'s Notes</h1>
+    <h1>{{ request.user | capfirst}}'s Notes</h1>
     <hr><br>
     <a href = "{% url 'add_note' %}" class="btn btn-primary" type="button"><i class="fas fa-plus"></i><b> Add Note</b></a>
     <a href="{% url 'logout' %}" class="btn btn-link" type="button"><i class="fas fa-sign-out-alt"></i><b> Logout</a>
